@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { ArrowIconFilter } from "./ArrowIconFilter"
+import { ArrowIconFilter } from "./icons/ArrowIconFilter"
 import { useState } from "react";
 import { useFilter } from "@/hooks/useFilter";
 import { PriorityTypes } from "@/types/priority-types";
