@@ -9,6 +9,7 @@ const FilterContainer = styled.div`
     width: 100%;
     align-items: start;
     justify-content: space-between;
+    margin-bottom: 32px;
 `
 export const FilterBar = () =>{
     return(

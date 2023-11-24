@@ -36,6 +36,7 @@ const FilterContainer = styled.div`
 
 const PriorityFilter  = styled.ul`
     position: absolute;
+    z-index: 99;
     background-color: #FFF;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -80,7 +81,8 @@ export const FilterByPriority = () =>{
             <button onClick={handleFilterPriority}>Organizar por
                 <ArrowIconFilter/>
             </button>
-            {showFilter && <PriorityFilter>
+            {showFilter && 
+                <PriorityFilter>
                     <li onClick={() =>handleUpdatePriority(PriorityTypes.NEWS)}>Novidades</li>
                     <li onClick={() =>handleUpdatePriority(PriorityTypes.BIGGEST_PRICE)}>Preço: Maior - Menor</li>
                     <li onClick={() =>handleUpdatePriority(PriorityTypes.MINOR_PRICE)}>Preço: Menor - Maior</li>
