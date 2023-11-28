@@ -14,7 +14,6 @@ const ListContainer= styled.div`
 export const ProductList = () =>{
 
     const { data } = useProducts();
-    console.log(data);
     return(
         <ListContainer>
             {data?.map(product => <ProductCard

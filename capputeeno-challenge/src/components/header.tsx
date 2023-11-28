@@ -18,15 +18,27 @@ const TagHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 160px;
+  padding: 12px 24px;
+
+  @media (min-width: 968px){
+    padding: 20px 160px;
+  }
 `;
 
-const Logo = styled.div`
+const Logo = styled.a`
   color: var(--logo-color);
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 60px;
   flex: 1;
+
+  @media (min-width: 968px){
+    font-size: 40px;
+  }
+
+  @media (max-width: 968px) and (min-width: 768px){
+    font-size: 24px;
+  }
 `;
 
 

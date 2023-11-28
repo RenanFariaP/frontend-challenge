@@ -21,8 +21,8 @@ const FilterContainer = styled.div`
         justify-content: center;
         background-color: transparent;
         cursor: pointer;
-        padding: 5px 0 5px 10px;
         border-radius: 3px;
+        border-bottom: 4px solid transparent;
 
         svg{
             margin-left: 16px;
@@ -43,7 +43,7 @@ const PriorityFilter  = styled.ul`
     list-style: none;
     min-width: 176px;
     top: 100%;
-    right: 0;
+    right: 8px;
 
     li{
         color: var(--text-dark);    

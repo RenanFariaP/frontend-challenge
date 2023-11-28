@@ -3,7 +3,7 @@ import { SearchIcon } from "./icons/searchIcon";
 import { InputHTMLAttributes } from "react";
 
 export const InputSearch = styled.input`
-    width: 352px;
+    width: 100%;
     border-radius: 8px;
     padding: 10px 16px;
 
@@ -11,22 +11,31 @@ export const InputSearch = styled.input`
 
     font-family: inherit;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 12px;
+    line-height: 20px;
     border: none;
     outline: none;
     color: var(--text-dark);
+
+    @media (min-width: 968px){
+        font-size: 14px;
+        line-height: 22px;
+    }
 `;
 
 const InputContainer = styled.div`
     position: relative;
-    width: 352px;
+    width: 250px;
     
     svg{
         position: absolute;
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
+    }
+
+    @media (min-width: 968px){
+        width: 352px;
     }
 `
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
