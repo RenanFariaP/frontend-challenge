@@ -2,6 +2,7 @@
 import { BackButton } from "@/components/BackButton";
 import { DefaultPageLayout } from "@/components/defaultPageLayout";
 import { AddCartIcon } from "@/components/icons/AddCartIcon";
+import { useConvertPrice } from "@/hooks/useConvertPrice";
 import { useProduct } from "@/hooks/useProduct";
 import { QueryClient, QueryClientProvider } from "react-query";
 import styled from "styled-components";
@@ -19,7 +20,7 @@ const ProductInfo = styled.section`
   gap: 32px;
 `;
 
-const AddCart = styled.div`
+const AddCart = styled.button`
   display: flex;
   width: 100%;
   background-color: #115d8c;
@@ -30,6 +31,14 @@ const AddCart = styled.div`
   font-size: 16px;
   border-radius: 4px;
   gap: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+  }
 `;
 
 const ProductDetail = styled.div`
@@ -97,8 +106,7 @@ const ProductDetail = styled.div`
 
 const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
   const { data } = useProduct(searchParams.id);
-  const price = data?.price_in_cents === undefined ? 0 : data.price_in_cents;
-  const priceConverted = (price / 100).toString();
+  const price = useConvertPrice(data?.price_in_cents);
   return (
     <DefaultPageLayout>
       <Container>
@@ -107,9 +115,9 @@ const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
           <img src={data?.image_url} />
           <ProductDetail>
             <div>
-              <span>{data?.category}</span>
+              <span>{data?.category === 'mugs' ? "Canenca" : "Camiseta"}</span>
               <h1>{data?.name}</h1>
-              <h2>R${priceConverted.replace(".", ",")}</h2>
+              <h2>R${price}</h2>
               <p>
                 *Frete de R$40,00 para todo o Brasil. Grátis para compras acima
                 de R$900,00.

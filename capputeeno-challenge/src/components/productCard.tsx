@@ -1,9 +1,12 @@
+import { useConvertPrice } from "@/hooks/useConvertPrice";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 
 interface ProductCardProps {
   image: string;
   title: string;
   price: number;
+  id: string;
 }
 
 const Card = styled.div`
@@ -15,11 +18,24 @@ const Card = styled.div`
   backdrop-filter: blur(10px);
   border-radius: 4px;
   width: 256px;
+  cursor: pointer;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.5);
+
+    img{
+      opacity: 1;
+    }
+  }
 
   img {
     width: inherit;
     height: 300px;
     border-radius: 4px 4px 0 0;
+    opacity: 0.8;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
   h3 {
@@ -53,14 +69,20 @@ const Card = styled.div`
 `;
 
 export const ProductCard = (props: ProductCardProps) => {
-  let priceConverted = (props.price / 100).toString();
+  const price = useConvertPrice(props?.price);
+  
+  const router = useRouter();
+
+  const handleNavigate= () =>{
+    router.push("/product?id="+props.id);
+  }
   return (
-    <Card>
+    <Card onClick={handleNavigate}>
       <img src={props.image} />
       <div>
         <h3>{props.title}</h3>
         <div></div>
-        <p>R$ {priceConverted.replace(".", ",")}</p>
+        <p>R$ {price}</p>
       </div>
     </Card>
   );
