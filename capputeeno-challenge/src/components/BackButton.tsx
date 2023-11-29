@@ -14,6 +14,7 @@ const Button = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  margin-bottom: 10px;
 `;
 
 interface ButtonProps {

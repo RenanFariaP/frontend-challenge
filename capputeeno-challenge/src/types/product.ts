@@ -7,3 +7,7 @@ export interface Product{
     category?: string
 }
 
+export interface ProductInCart extends Product{
+    quantity: number;
+}
+

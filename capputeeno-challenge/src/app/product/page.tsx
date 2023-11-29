@@ -37,7 +37,7 @@ const AddCart = styled.button`
 
   &:hover{
     transform: scale(1.05);
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+    box-shadow: 1px 1px 5px rgb(0, 0, 0);
   }
 `;
 
@@ -87,7 +87,7 @@ const ProductDetail = styled.div`
     font-size: 12px;
     line-height: 18px;
     font-weight: 400;
-    color: var(--text-dark);
+    color: var(--text-dark-2);
     margin-bottom: 24px;
   }
 
@@ -97,7 +97,7 @@ const ProductDetail = styled.div`
         font-size: 14px;
         line-height: 21px;
         font-weight: 400;
-        color: var(--text-dark);
+        color: var(--text-dark-2);
         margin-bottom: 24px;
       }
     }

@@ -31,6 +31,7 @@ const Logo = styled.a`
   font-weight: 400;
   line-height: 60px;
   flex: 1;
+  text-decoration: none;
 
   @media (min-width: 968px){
     font-size: 40px;
@@ -46,9 +47,9 @@ export const Header = (props: HeaderProps) => {
   const {setSearch, search}= useFilter();
   return (
     <TagHeader>
-      <Logo className={sairaStencil.className}>Capputeeno</Logo>
+      <Logo className={sairaStencil.className} href="/">Capputeeno</Logo>
       <InputSearchIcon value={search} handleChange={setSearch} placeholder="Procurando por algo específico?"/>
-      <CartControl />
+      <CartControl navigate="/cart"/>
     </TagHeader>
   );
 };

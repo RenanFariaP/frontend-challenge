@@ -17,13 +17,13 @@ const Card = styled.div`
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   border-radius: 4px;
-  width: 256px;
+  width: 290px;
   cursor: pointer;
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
   &:hover{
     transform: scale(1.1);
-    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 
     img{
       opacity: 1;
