@@ -107,6 +107,31 @@ const ProductDetail = styled.div`
 const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
   const { data } = useProduct(searchParams.id);
   const price = useConvertPrice(data?.price_in_cents);
+
+  const handleAddToCart = () =>{
+    const cartItems = localStorage.getItem('cart-items');
+    if(cartItems) {
+      let cartItemsArray = JSON.parse(cartItems);
+      let existingProductIndex = cartItemsArray.findIndex((item: { id: string; }) => item.id === searchParams.id);
+
+      if(existingProductIndex != -1){
+        cartItemsArray[existingProductIndex].quantity += 1;
+      } else {
+        cartItemsArray.push({...data, id: searchParams.id, quantity: 1})
+      }
+
+      localStorage.setItem('cart-items', JSON.stringify(cartItemsArray));
+  } else {
+    const newCart = [
+      {
+        ...data,
+        id: searchParams.id,
+        quantity: 1
+      }
+    ];
+    localStorage.setItem('cart-items', JSON.stringify(newCart))
+  }
+}
   return (
     <DefaultPageLayout>
       <Container>
@@ -127,7 +152,7 @@ const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
                 <p>{data?.description}</p>
               </div>
             </div>
-            <AddCart>
+            <AddCart onClick={handleAddToCart}>
               <AddCartIcon />
               ADICIONAR AO CARRINHO
             </AddCart>

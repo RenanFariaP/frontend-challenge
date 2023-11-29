@@ -26,6 +26,7 @@ export const useProduct = (id: string) =>{
     queryFn: () => fetcher(id),
     queryKey: ["products", id],
     enabled: !!id,
+    staleTime: 1000 * 5 * 60,
   });
 
 
