@@ -3,8 +3,8 @@ import { BackButton } from "@/components/BackButton";
 import { DefaultPageLayout } from "@/components/defaultPageLayout";
 import { AddCartIcon } from "@/components/icons/AddCartIcon";
 import { useConvertPrice } from "@/hooks/useConvertPrice";
+import { useFilter } from "@/hooks/useFilter";
 import { useProduct } from "@/hooks/useProduct";
-import { QueryClient, QueryClientProvider } from "react-query";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -13,11 +13,25 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 22px;
+
 `;
 
 const ProductInfo = styled.section`
   display: flex;
   gap: 32px;
+
+  img {
+    width: 60%;
+    height: auto;
+  }
+
+  @media (max-width: 768px){
+    flex-direction: column;
+
+    img{
+      width: 100%;
+    }
+  }
 `;
 
 const AddCart = styled.button`
@@ -35,6 +49,10 @@ const AddCart = styled.button`
   cursor: pointer;
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
+  @media (max-width: 768px){
+    font-size: 12px;
+  }  
+
   &:hover{
     transform: scale(1.05);
     box-shadow: 1px 1px 5px rgb(0, 0, 0);
@@ -46,11 +64,7 @@ const ProductDetail = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  img {
-    width: 640px;
-    height: 580px;
-  }
-
+  
   span {
     font-size: 16px;
     line-height: 24px;
@@ -107,11 +121,14 @@ const ProductDetail = styled.div`
 const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
   const { data } = useProduct(searchParams.id);
   const price = useConvertPrice(data?.price_in_cents);
+  const { setCartCount } = useFilter();
 
   const handleAddToCart = () =>{
     const cartItems = localStorage.getItem('cart-items');
+    let cartItemsArray = [];
     if(cartItems) {
-      let cartItemsArray = JSON.parse(cartItems);
+      cartItemsArray = JSON.parse(cartItems);
+
       let existingProductIndex = cartItemsArray.findIndex((item: { id: string; }) => item.id === searchParams.id);
 
       if(existingProductIndex != -1){
@@ -131,6 +148,7 @@ const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
     ];
     localStorage.setItem('cart-items', JSON.stringify(newCart))
   }
+  setCartCount(cartItemsArray.length);
 }
   return (
     <DefaultPageLayout>
@@ -140,7 +158,7 @@ const ProductPage = ({ searchParams }: { searchParams: { id: string } }) => {
           <img src={data?.image_url} />
           <ProductDetail>
             <div>
-              <span>{data?.category === 'mugs' ? "Canenca" : "Camiseta"}</span>
+              <span>{data?.category === 'mugs' ? "Caneca" : "Camiseta"}</span>
               <h1>{data?.name}</h1>
               <h2>R${price}</h2>
               <p>

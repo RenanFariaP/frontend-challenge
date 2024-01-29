@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useFilter } from './useFilter';
 
 export function useLocalStorage<T>(item: string, initialValue: T){
-    const [value, setValue] = useState<T>(initialValue)
+    const [value, setValue] = useState<T>(initialValue);
+    const {setCartCount} = useFilter();
 
     useEffect(()=>{
         if (typeof window === 'undefined') return;
@@ -12,6 +14,7 @@ export function useLocalStorage<T>(item: string, initialValue: T){
     const updateLocalStorage = (newValue: T) => {
         setValue(newValue);
         localStorage.setItem(item,JSON.stringify(newValue));
+        
     }
 
     return {

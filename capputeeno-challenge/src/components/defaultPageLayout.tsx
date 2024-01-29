@@ -10,5 +10,6 @@ export const DefaultPageLayout = styled.div`
   @media (min-width: 968px) {
     padding: 34px 160px;
   }
+  
 `;
 

@@ -4,8 +4,10 @@ import { BackButton } from "@/components/BackButton";
 import { CartItem } from "@/components/cart/cart-item";
 import { DefaultPageLayout } from "@/components/defaultPageLayout";
 import { useConvertPrice } from "@/hooks/useConvertPrice";
+import { useFilter } from "@/hooks/useFilter";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { ProductInCart } from "@/types/product";
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -120,7 +122,7 @@ const FinishButton = styled.button`
   cursor: pointer;
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  &:hover{
+  &:hover {
     transform: scale(1.05);
     box-shadow: 1px 1px 8px rgb(0, 0, 0);
   }
@@ -139,17 +141,19 @@ const InfoLinks = styled.div`
     cursor: pointer;
     font-weight: 500;
 
-    &:hover{
-        color: var(--text-dark-2);
+    &:hover {
+      color: var(--text-dark-2);
     }
   }
 `;
 
 export const CartPage = () => {
+  const router = useRouter();
   const { value, updateLocalStorage } = useLocalStorage<ProductInCart[]>(
     "cart-items",
     []
   );
+  const { cartCount, setCartCount } = useFilter();
   const calculateTotal = (value: ProductInCart[]) => {
     return value.reduce(
       (sum, item) => (sum += item.price_in_cents * item.quantity),
@@ -173,6 +177,10 @@ export const CartPage = () => {
       if (item.id !== id) return item;
     });
     updateLocalStorage(newValue);
+    if (newValue.length === 0) {
+      router.push("/");
+    }
+    setCartCount(newValue.length);
   };
 
   return (
