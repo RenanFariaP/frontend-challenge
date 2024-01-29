@@ -147,7 +147,7 @@ const InfoLinks = styled.div`
   }
 `;
 
-export const CartPage = () => {
+const CartPage = ():JSX.Element => {
   const router = useRouter();
   const { value, updateLocalStorage } = useLocalStorage<ProductInCart[]>(
     "cart-items",
@@ -235,4 +235,6 @@ export const CartPage = () => {
   );
 };
 
+
 export default CartPage;
+
